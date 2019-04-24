@@ -17,10 +17,10 @@ def error(data):
 
 def request(request, expect):
     global sock
-    print ">> "+request
+    print(">> "+request)
     sock.send(request)
     response = sock.recv(4096)
-    print "<< "+response
+    print("<< "+response)
     resp = response.split(' ')
     if resp[0] != expect:
         error(response)
@@ -61,7 +61,7 @@ sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 try:
     sock.connect(server)
 except:
-    sys.stderr.write("Cannot connect to SMTP server at "+server[0]+"!")
+    sys.stderr.write("Cannot connect to SMTP server at "+server[0]+"!\n")
     sys.exit(1)
 
 
@@ -74,4 +74,5 @@ request("From: "+fromaddr+"\nTo: "+toaddr+"\nSubject: "+subject+"\n"+body+"\r\n.
 request("QUIT\r\n", "221")
 
 sock.close()
-print "=== Complete ===\n"
+print("=== Complete ===\n")
+
